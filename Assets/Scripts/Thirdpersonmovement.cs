@@ -6,7 +6,8 @@ public class Thirdpersonmovement : MonoBehaviour
 {
     public CharacterController controller;
     public Transform cam;
-   
+    public Animator anim;
+
     public float speed = 8f;
     public float sprintspeed = 16f;
 
@@ -24,11 +25,21 @@ public class Thirdpersonmovement : MonoBehaviour
 
     void Update()
     {
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y < 0)
-        {
+        {         
             velocity.y = -2f;
+        }
+
+        if (!isGrounded)
+        {
+            anim.SetBool("Falling", true);
+        }
+        else
+        {
+            anim.SetBool("Falling", false);
         }
 
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -37,6 +48,9 @@ public class Thirdpersonmovement : MonoBehaviour
 
         if ((direction.magnitude >= 0.1f) && (!Input.GetButton("Fire3")))
         {
+            anim.SetBool("Walking", true);
+            anim.SetBool("Standard Run", false);
+            anim.SetBool("Jump", false);
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
@@ -45,9 +59,17 @@ public class Thirdpersonmovement : MonoBehaviour
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
 
         }
+        if ((direction.magnitude <= 0.1f))
+        {
+            anim.SetBool("Walking", false);
+            anim.SetBool("Standard Run", false);
+            anim.SetBool("Jump", false);
+        }
 
         if ((direction.magnitude >= 0.1f) && (Input.GetButton("Fire3")))
         {
+            anim.SetBool("Standard Run", true);
+            anim.SetBool("Jump", false);
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
@@ -60,10 +82,17 @@ public class Thirdpersonmovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            anim.SetBool("Jump", true);
+            Invoke("JumpAnimation", 0.25f);
         }
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
+
+    }
+    void JumpAnimation()
+    {
+        velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
     }
 }
