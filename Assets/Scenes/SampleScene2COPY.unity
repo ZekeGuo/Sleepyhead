@@ -200,7 +200,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17797121}
-  m_LocalRotation: {x: 0.021086449, y: -0.00000002847835, z: 1.2631736e-10, w: 0.9997777}
+  m_LocalRotation: {x: 0.021086449, y: 0.000000028481606, z: -1.2629084e-10, w: 0.9997777}
   m_LocalPosition: {x: 2.2, y: 1.9361255, z: -16.738953}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -307,7 +307,7 @@ MonoBehaviour:
   sprintspeed: 16
   turnSmoothTime: 0.1
   gravity: -16.92
-  jumpHeight: 2
+  jumpHeight: 3
   groundCheck: {fileID: 193867689}
   groundDistance: 0.4
   groundMask:
@@ -379,7 +379,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100533969}
-  m_LocalRotation: {x: 0.02943496, y: -0.000000017232482, z: 5.0745735e-10, w: 0.99956673}
+  m_LocalRotation: {x: 0.02943496, y: 0.000000017232482, z: -5.0745735e-10, w: 0.99956673}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -423,7 +423,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh203076
+  m_Name: pb_Mesh16628
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -844,7 +844,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135408075}
-  m_LocalRotation: {x: 0.006241397, y: -0.000000017218014, z: 1.0746657e-10, w: 0.9999805}
+  m_LocalRotation: {x: 0.0062413984, y: 0.000000017227368, z: -1.0752499e-10, w: 0.9999805}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1702,7 +1702,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029878334}
-  m_LocalRotation: {x: 0.052713282, y: -0.000000017711272, z: 9.349191e-10, w: 0.9986097}
+  m_LocalRotation: {x: 0.0527133, y: 0.000000017711276, z: -9.349196e-10, w: 0.9986097}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1900,7 +1900,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9019793850170245459}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1916,7 +1916,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450653572051025}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: closet_IG_GEO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2733,7 +2733,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8291028308221657692}
   - component: {fileID: 3918434030558349597}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3669,7 +3669,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1279046736650696287}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3850,7 +3850,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2406987294989609399}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3934,7 +3934,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6765427535468851973}
   - component: {fileID: 6817047653978993200}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: closet_IG_GEO 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3968,7 +3968,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3692079339720967360}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: closet_IG_GEO
   m_TagString: Untagged
   m_Icon: {fileID: 0}

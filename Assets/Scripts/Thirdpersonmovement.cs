@@ -89,7 +89,27 @@ public class Thirdpersonmovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
+        if (Input.GetButtonDown("Fire1") && isGrounded)
+        {
+            anim.SetBool("Punch Combo", true);
+            Invoke("Punch", 0.5f);
+        }
 
+        if (Input.GetButtonDown("Fire2") && isGrounded)
+        {
+            anim.SetBool("Roll", true);
+            Invoke("Roll", 3f);
+        }
+
+
+    }
+    void Punch()
+    {
+        anim.SetBool("Punch Combo", false);
+    }
+    void Roll()
+    {
+        anim.SetBool("Roll", false);
     }
     void JumpAnimation()
     {
