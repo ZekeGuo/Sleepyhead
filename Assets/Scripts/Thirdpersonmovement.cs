@@ -10,6 +10,7 @@ public class Thirdpersonmovement : MonoBehaviour
 
     public float speed = 8f;
     public float rollingSpeed = 4f;
+    public float crouchSpeed = 4f;
     public float sprintspeed = 16f;
 
     public float turnSmoothTime = 0.1f;
@@ -59,7 +60,16 @@ public class Thirdpersonmovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+
+            // Decide the walk speed based on standing/crouch
+            if (anim.GetBool("Crouch") == true)
+            {
+                controller.Move(moveDir.normalized * crouchSpeed * Time.deltaTime);
+            } else
+            {
+                controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            }
+
         }
 
         // Idle
@@ -103,7 +113,7 @@ public class Thirdpersonmovement : MonoBehaviour
         // Roll
         if (Input.GetButtonDown("Fire2") && isGrounded)
         {
-            rollingFrame = 1600;
+            rollingFrame = 1800;
             anim.SetBool("Roll", true);
             Invoke("Roll", 3f);
         }
@@ -112,10 +122,14 @@ public class Thirdpersonmovement : MonoBehaviour
         {
             controller.Move(transform.forward * Time.deltaTime * rollingSpeed );
             rollingFrame --;
-            Debug.Log(rollingFrame);
         }
-      
 
+        // Crouch
+        if (Input.GetKeyDown(KeyCode.C) && isGrounded)
+        {
+            bool isCrounch = anim.GetBool("Crouch");
+            anim.SetBool("Crouch", !isCrounch);
+        }
 
     }
     void Punch()
