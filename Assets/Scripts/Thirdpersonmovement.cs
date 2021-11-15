@@ -91,7 +91,16 @@ public class Thirdpersonmovement : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-            controller.Move(moveDir.normalized * sprintspeed * Time.deltaTime);
+            if (anim.GetBool("Crouch") == false)
+            {
+                controller.Move(moveDir.normalized * sprintspeed * Time.deltaTime);
+            } else
+            {
+                controller.Move(moveDir.normalized * crouchSpeed * Time.deltaTime);
+            }
+
+
+
         }
 
         // Jump
