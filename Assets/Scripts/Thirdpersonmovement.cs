@@ -19,17 +19,23 @@ public class Thirdpersonmovement : MonoBehaviour
     float turnSmoothVelocity;
 
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
+    public float groundDistance = 0.2f;
+    public float waterDistance = 0.1f;
     public LayerMask groundMask;
+    public LayerMask waterMask;
     private int rollingFrame = 0;
 
     Vector3 velocity;
     bool isGrounded;
+    bool isInWater;
 
     void Update()
     {
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isInWater = Physics.CheckSphere(groundCheck.position, waterDistance, waterMask);
+
+        Debug.Log(anim.GetBool("InWater"));
 
         if (isGrounded && velocity.y < 0)
         {         
@@ -53,6 +59,7 @@ public class Thirdpersonmovement : MonoBehaviour
         if ((direction.magnitude >= 0.1f) && (!Input.GetButton("Fire3")))
         {
             anim.SetBool("Walking", true);
+            anim.SetBool("Swim", true);
             anim.SetBool("Standard Run", false);
             anim.SetBool("Jump", false);
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
@@ -76,6 +83,7 @@ public class Thirdpersonmovement : MonoBehaviour
         if ((direction.magnitude <= 0.1f))
         {
             anim.SetBool("Walking", false);
+            anim.SetBool("Swim", false);
             anim.SetBool("Standard Run", false);
             anim.SetBool("Jump", false);
         }
@@ -139,6 +147,16 @@ public class Thirdpersonmovement : MonoBehaviour
             bool isCrounch = anim.GetBool("Crouch");
             anim.SetBool("Crouch", !isCrounch);
         }
+
+        // Idle in water
+        if (isInWater)
+        {
+            anim.SetBool("InWater", true);
+        } else
+        {
+            anim.SetBool("InWater", false);
+        }
+
 
     }
     void Punch()
