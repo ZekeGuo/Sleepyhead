@@ -83,6 +83,7 @@ public class Thirdpersonmovement : MonoBehaviour
         if ((direction.magnitude <= 0.1f))
         {
             anim.SetBool("Walking", false);
+            anim.SetBool("Swim", false);
             anim.SetBool("Standard Run", false);
             anim.SetBool("Jump", false);
         }
