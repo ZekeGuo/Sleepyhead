@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PrincessController : MonoBehaviour
 {
     public CharacterController controller;
     public Transform cam;
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
             if (isCrouching)
             {
                 controller.Move(moveDir.normalized * crouchSpeed * Time.deltaTime);
-            } 
+            }
             else
             {
                 // play walk animation
@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("Walking", true);
             else
                 anim.SetBool("Walking", false);
-        } 
+        }
 
         // Jump
         if (Input.GetButtonDown("Jump") && isGrounded)
@@ -198,7 +198,7 @@ public class PlayerController : MonoBehaviour
             {
                 anim.SetBool("Walking", false);
             }
-        } 
+        }
         else
         {
             anim.SetBool("InWater", false);

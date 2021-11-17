@@ -16,23 +16,20 @@ public class CostumeSwitch : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        if (costume == null && possibleCostume.Count >= 1)
+        for (int i = 0; i < possibleCostume.Count; i++)
         {
-            costume = possibleCostume[0];
+            possibleCostume[i].SetActive(false);
         }
-
-        SwitchCostume();
+        possibleCostume[0].SetActive(true);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        previousPosition = possibleCostume[whichCostume].transform;
         // Press Q to switch to previous costume
         if (Input.GetKeyDown(KeyCode.Q))
         {
-
             if (whichCostume == 0)
             {
                 whichCostume = possibleCostume.Count - 1;
@@ -45,17 +42,21 @@ public class CostumeSwitch : MonoBehaviour
             SwitchCostume();
         }
 
+        previousPosition = possibleCostume[whichCostume].transform;
+
         SwitchCameraFocus();
     }
 
     public void SwitchCostume()
     {
+
         for (int i = 0; i < possibleCostume.Count; i++)
         {
+            possibleCostume[i].SetActive(true);
+            possibleCostume[i].transform.position = previousPosition.transform.position;
             possibleCostume[i].SetActive(false);
         }
         possibleCostume[whichCostume].SetActive(true);
-        possibleCostume[whichCostume].transform.position = previousPosition.position; 
     }
 
     // Make sure the camera focus on the new costume.
