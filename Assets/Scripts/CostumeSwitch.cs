@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CostumeSwitch : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class CostumeSwitch : MonoBehaviour
     public GameObject costume;
     public List<GameObject> possibleCostume;
     public int whichCostume;
+    public CinemachineFreeLook cinemachineFreeLook;
 
     // Update is called once per frame
     void Start()
@@ -40,7 +42,7 @@ public class CostumeSwitch : MonoBehaviour
             SwitchCostume();
         }
 
- 
+        SwitchCameraFocus();
     }
 
     public void SwitchCostume()
@@ -51,4 +53,12 @@ public class CostumeSwitch : MonoBehaviour
         }
         possibleCostume[whichCostume].SetActive(true);
     }
+
+    // Make sure the camera focus on the new costume.
+    public void SwitchCameraFocus()
+    {
+        cinemachineFreeLook.Follow = possibleCostume[whichCostume].transform;
+        cinemachineFreeLook.LookAt = possibleCostume[whichCostume].transform;
+    }
+
 }
