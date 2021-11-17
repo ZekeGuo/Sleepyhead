@@ -11,6 +11,7 @@ public class CostumeSwitch : MonoBehaviour
     public List<GameObject> possibleCostume;
     public int whichCostume;
     public CinemachineFreeLook cinemachineFreeLook;
+    Transform previousPosition;
 
     // Update is called once per frame
     void Start()
@@ -27,9 +28,11 @@ public class CostumeSwitch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        previousPosition = possibleCostume[whichCostume].transform;
         // Press Q to switch to previous costume
         if (Input.GetKeyDown(KeyCode.Q))
         {
+
             if (whichCostume == 0)
             {
                 whichCostume = possibleCostume.Count - 1;
@@ -52,6 +55,7 @@ public class CostumeSwitch : MonoBehaviour
             possibleCostume[i].SetActive(false);
         }
         possibleCostume[whichCostume].SetActive(true);
+        possibleCostume[whichCostume].transform.position = previousPosition.position; 
     }
 
     // Make sure the camera focus on the new costume.

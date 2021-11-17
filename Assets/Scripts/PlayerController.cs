@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
 
-        velocity.y += gravity * Time.deltaTime;
+        velocity.y += gravity * Time.deltaTime * 1.5f;
         controller.Move(velocity * Time.deltaTime);
 
 
