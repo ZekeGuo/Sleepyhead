@@ -180,29 +180,33 @@ public class PlayerController : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
 
-        // Floating in water
+        // Floating in water && swim
         if (isInWater)
         {
             anim.SetBool("InWater", true);
-            if (direction.magnitude > 0.1f)
+            if (direction.magnitude >= 0.1f)
+            {
                 anim.SetBool("Walking", true);
+                ChangeAnimationState(SWIM);
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+                Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                controller.Move(moveDir.normalized * crouchSpeed * Time.deltaTime);
+            }
             else
+            {
                 anim.SetBool("Walking", false);
-            ChangeAnimationState(SWIM_IDLE);
-        }
-
-
-        // Swim
-        if (isInWater && direction.magnitude >= 0.1f)
+            }
+        } 
+        else
         {
-            // you can move during falling
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * crouchSpeed * Time.deltaTime);
+            anim.SetBool("InWater", false);
         }
+
+
+
 
 
 
