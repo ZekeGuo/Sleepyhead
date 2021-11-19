@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TextGuidence : MonoBehaviour
 {
-    public Button nextGuideButton;
+    public RawImage bg;
     // current guidence number
     int guidenceNum;
     [SerializeField] private GameObject Move;
@@ -13,6 +13,7 @@ public class TextGuidence : MonoBehaviour
     [SerializeField] private GameObject Jump;
     [SerializeField] private GameObject Crouch;
     [SerializeField] private GameObject Costume;
+    [SerializeField] private GameObject Princess;
 
 
 
@@ -22,12 +23,32 @@ public class TextGuidence : MonoBehaviour
     {
         Move.SetActive(true);
         guidenceNum = 0;
-        nextGuideButton.onClick.AddListener(ChangeGuide);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ChangeGuide();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && guidenceNum >= 4)
+        {
+            Costume.SetActive(false);
+            Move.SetActive(false);
+            Sprint.SetActive(false);
+            Jump.SetActive(false);
+            Crouch.SetActive(false);
+            Princess.SetActive(false);
+            bg.gameObject.SetActive(false);
+
+            if (GameObject.Find("xbot@Walking"))
+            {
+                Princess.SetActive(true);
+                bg.gameObject.SetActive(true);
+            } 
+        }
     }
 
     public void ChangeGuide()
@@ -56,7 +77,9 @@ public class TextGuidence : MonoBehaviour
         }
         if (guidenceNum >= 5)
         {
-            Destroy(gameObject);
+            bg.gameObject.SetActive(false);
+            Costume.SetActive(false);
+            Princess.SetActive(false);
         }
     }
 }
