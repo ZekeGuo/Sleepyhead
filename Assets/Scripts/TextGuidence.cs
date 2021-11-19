@@ -43,7 +43,7 @@ public class TextGuidence : MonoBehaviour
             Princess.SetActive(false);
             bg.gameObject.SetActive(false);
 
-            if (GameObject.Find("xbot@Walking"))
+            if (GameObject.Find("Parent_Player").GetComponent<CostumeSwitch>().whichCostume == 0)
             {
                 Princess.SetActive(true);
                 bg.gameObject.SetActive(true);
