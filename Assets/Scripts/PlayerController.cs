@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
     public float waterDistance = 0.1f;
     public LayerMask groundMask;
     public LayerMask waterMask;
-    private int rollingFrame = 0;
 
     Vector3 velocity;
     bool isGrounded;
