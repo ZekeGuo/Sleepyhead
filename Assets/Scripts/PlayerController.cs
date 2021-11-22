@@ -55,7 +55,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // check the collision continiously
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        isGrounded = controller.isGrounded;
         isInWater = Physics.CheckSphere(groundCheck.position, waterDistance, waterMask);
 
 

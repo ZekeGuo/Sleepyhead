@@ -27,8 +27,9 @@ public class CostumeSwitch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         // Press Q to switch to previous costume
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && Input.GetAxisRaw("Horizontal") <= 0.1f && Input.GetAxisRaw("Vertical") <= 0.1f)
         {
             if (whichCostume == 0)
             {
