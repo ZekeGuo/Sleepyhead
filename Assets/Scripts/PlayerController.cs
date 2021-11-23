@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -45,18 +46,31 @@ public class PlayerController : MonoBehaviour
     const string ROLL = "Stand To Roll";
     const string JUMP = "Jump";
 
+    // The money you have
+    public int coinNum;
+
 
     void Start()
     {
         anim = GetComponent<Animator>();
         isJumping = false;
+        coinNum = 0;
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.tag == "Coin")
+        {
+            Debug.Log("Coin");
+            coinNum ++;
+            GameObject.Find("coinNumber").GetComponent<Text>().text = coinNum.ToString();
+            Destroy(hit.gameObject);
+        }
+    }
 
     void Update()
     {
         // check the collision continiously
-
         isGrounded = controller.isGrounded;
         isInWater = Physics.CheckSphere(groundCheck.position, waterDistance, waterMask);
 
