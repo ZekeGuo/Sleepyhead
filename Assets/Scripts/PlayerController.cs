@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.2f;
     public float waterDistance = 0.1f;
+    public float activeClosetDistance = 2.0f;
     public LayerMask groundMask;
     public LayerMask waterMask;
 
@@ -204,8 +205,15 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("InWater", false);
         }
 
-
-
+        // activate the changing costume functionality when approaching the closet
+        float distance = Vector3.Distance(GameObject.Find("Closet").transform.position, transform.position);
+        if (distance < 2.5)
+        {
+            GameObject.Find("Parent_Player").GetComponent<CostumeSwitch>().isChanging = true;
+        } else
+        {
+            GameObject.Find("Parent_Player").GetComponent<CostumeSwitch>().isChanging = false;
+        }
 
 
 
