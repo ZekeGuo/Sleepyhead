@@ -206,14 +206,15 @@ public class PlayerController : MonoBehaviour
         }
 
         // activate the changing costume functionality when approaching the closet
-        //float distance = Vector3.Distance(GameObject.Find("Closet").transform.position, transform.position);
-        //if (distance < 2.5)
-        //{
-        //    GameObject.Find("Parent_Player").GetComponent<CostumeSwitch>().isChanging = true;
-        //} else
-        //{
-        //    GameObject.Find("Parent_Player").GetComponent<CostumeSwitch>().isChanging = false;
-        //}
+        float distance = Vector3.Distance(GameObject.Find("Closet").transform.position, transform.position);
+        if (distance < 2.5)
+        {
+            GameObject.Find("Parent_Player").GetComponent<CostumeSwitch>().isChanging = true;
+        }
+        else
+        {
+            GameObject.Find("Parent_Player").GetComponent<CostumeSwitch>().isChanging = false;
+        }
 
 
 
