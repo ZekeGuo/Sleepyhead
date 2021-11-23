@@ -33,13 +33,13 @@ public class CostumeSwitch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isChanging)
-        {
-            closetUI.SetActive(true);
-        } else
-        {
-            closetUI.SetActive(false);
-        }
+        //if(isChanging)
+        //{
+        //    closetUI.SetActive(true);
+        //} else
+        //{
+        //    closetUI.SetActive(false);
+        //}
         
         // Press Q to switch to previous costume
         if (Input.GetKeyDown(KeyCode.Q) && Input.GetAxisRaw("Horizontal") <= 0.1f && Input.GetAxisRaw("Vertical") <= 0.1f && isChanging)
@@ -77,20 +77,20 @@ public class CostumeSwitch : MonoBehaviour
         possibleCostume[whichCostume].SetActive(true);
 
         // set color of current costume
-        normalCostumeUI.GetComponent<Image>().color = Color.black;
-        PrincessCostumeUI.GetComponent<Image>().color = Color.black;
-        ClownCostumeUI.GetComponent<Image>().color = Color.black;
+        //normalCostumeUI.GetComponent<Image>().color = Color.black;
+        //PrincessCostumeUI.GetComponent<Image>().color = Color.black;
+        //ClownCostumeUI.GetComponent<Image>().color = Color.black;
 
-        if (whichCostume == 0)
-        {
-            normalCostumeUI.GetComponent<Image>().color = Color.white;
-        } else if(whichCostume == 1)
-        {
-            PrincessCostumeUI.GetComponent<Image>().color = Color.white;
-        } else
-        {
-            ClownCostumeUI.GetComponent<Image>().color = Color.white;
-        }
+        //if (whichCostume == 0)
+        //{
+        //    normalCostumeUI.GetComponent<Image>().color = Color.white;
+        //} else if(whichCostume == 1)
+        //{
+        //    PrincessCostumeUI.GetComponent<Image>().color = Color.white;
+        //} else
+        //{
+        //    ClownCostumeUI.GetComponent<Image>().color = Color.white;
+        //}
     }
 
     // Make sure the camera focus on the new costume.
