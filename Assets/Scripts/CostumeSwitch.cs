@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Cinemachine;
 
 public class CostumeSwitch : MonoBehaviour
@@ -12,6 +13,12 @@ public class CostumeSwitch : MonoBehaviour
     public int whichCostume;
     public CinemachineFreeLook cinemachineFreeLook;
     Transform previousPosition;
+    public bool isChanging;
+    public GameObject closetUI;
+    public GameObject normalCostumeUI;
+    public GameObject PrincessCostumeUI;
+    public GameObject ClownCostumeUI;
+
 
     // Update is called once per frame
     void Start()
@@ -21,15 +28,22 @@ public class CostumeSwitch : MonoBehaviour
             possibleCostume[i].SetActive(false);
         }
         possibleCostume[0].SetActive(true);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (isChanging)
+        {
+            closetUI.SetActive(true);
+        }
+        else
+        {
+            closetUI.SetActive(false);
+        }
+
         // Press Q to switch to previous costume
-        if (Input.GetKeyDown(KeyCode.Q) && Input.GetAxisRaw("Horizontal") <= 0.1f && Input.GetAxisRaw("Vertical") <= 0.1f)
+        if (Input.GetKeyDown(KeyCode.Q) && Input.GetAxisRaw("Horizontal") <= 0.1f && Input.GetAxisRaw("Vertical") <= 0.1f && isChanging)
         {
             if (whichCostume == 0)
             {
@@ -45,6 +59,9 @@ public class CostumeSwitch : MonoBehaviour
 
         previousPosition = possibleCostume[whichCostume].transform;
 
+
+
+
         SwitchCameraFocus();
     }
 
@@ -57,7 +74,26 @@ public class CostumeSwitch : MonoBehaviour
             possibleCostume[i].transform.position = previousPosition.transform.position;
             possibleCostume[i].SetActive(false);
         }
+
         possibleCostume[whichCostume].SetActive(true);
+
+        // set color of current costume
+        normalCostumeUI.GetComponent<Image>().color = Color.black;
+        PrincessCostumeUI.GetComponent<Image>().color = Color.black;
+        ClownCostumeUI.GetComponent<Image>().color = Color.black;
+
+        if (whichCostume == 0)
+        {
+            normalCostumeUI.GetComponent<Image>().color = Color.white;
+        }
+        else if (whichCostume == 1)
+        {
+            PrincessCostumeUI.GetComponent<Image>().color = Color.white;
+        }
+        else
+        {
+            ClownCostumeUI.GetComponent<Image>().color = Color.white;
+        }
     }
 
     // Make sure the camera focus on the new costume.

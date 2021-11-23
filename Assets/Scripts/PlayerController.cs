@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.2f;
     public float waterDistance = 0.1f;
+    public float activeClosetDistance = 2.0f;
     public LayerMask groundMask;
     public LayerMask waterMask;
 
@@ -44,18 +46,31 @@ public class PlayerController : MonoBehaviour
     const string ROLL = "Stand To Roll";
     const string JUMP = "Jump";
 
+    // The money you have
+    public int coinNum;
+
 
     void Start()
     {
         anim = GetComponent<Animator>();
         isJumping = false;
+        coinNum = 0;
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.tag == "Coin")
+        {
+            Debug.Log("Coin");
+            coinNum ++;
+            GameObject.Find("coinNumber").GetComponent<Text>().text = coinNum.ToString();
+            Destroy(hit.gameObject);
+        }
+    }
 
     void Update()
     {
         // check the collision continiously
-
         isGrounded = controller.isGrounded;
         isInWater = Physics.CheckSphere(groundCheck.position, waterDistance, waterMask);
 
@@ -204,8 +219,16 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("InWater", false);
         }
 
-
-
+        // activate the changing costume functionality when approaching the closet
+        float distance = Vector3.Distance(GameObject.Find("Closet").transform.position, transform.position);
+        if (distance < 2.5)
+        {
+            GameObject.Find("Parent_Player").GetComponent<CostumeSwitch>().isChanging = true;
+        }
+        else
+        {
+            GameObject.Find("Parent_Player").GetComponent<CostumeSwitch>().isChanging = false;
+        }
 
 
 
