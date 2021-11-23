@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
     public float waterDistance = 0.1f;
     public LayerMask groundMask;
     public LayerMask waterMask;
-    private int rollingFrame = 0;
 
     Vector3 velocity;
     bool isGrounded;
@@ -56,7 +55,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // check the collision continiously
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        isGrounded = controller.isGrounded;
         isInWater = Physics.CheckSphere(groundCheck.position, waterDistance, waterMask);
 
 
