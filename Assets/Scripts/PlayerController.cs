@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public float activeClosetDistance = 2.0f;
     public LayerMask groundMask;
     public LayerMask waterMask;
+    public float characterHeight;
 
     Vector3 velocity;
     bool isGrounded;
@@ -168,6 +169,17 @@ public class PlayerController : MonoBehaviour
             else
                 anim.SetBool("Walking", false);
         } 
+
+        // modify the height of player when they are crouching 
+        if (isCrouching)
+        {
+            gameObject.GetComponent<CharacterController>().height = characterHeight * 0.6f;
+            gameObject.GetComponent<CharacterController>().center = new Vector3(0, characterHeight * 0.3f, 0);
+        } else
+        {
+            gameObject.GetComponent<CharacterController>().height = characterHeight;
+            gameObject.GetComponent<CharacterController>().center = new Vector3(0, characterHeight * 0.5f, 0);
+        }
 
         // Jump
         if (Input.GetButtonDown("Jump") && isGrounded && !isCrouching)
