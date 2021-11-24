@@ -47,15 +47,11 @@ public class PlayerController : MonoBehaviour
     const string ROLL = "Stand To Roll";
     const string JUMP = "Jump";
 
-    // The money you have
-    public int coinNum;
-
 
     void Start()
     {
         anim = GetComponent<Animator>();
         isJumping = false;
-        coinNum = 0;
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -63,8 +59,8 @@ public class PlayerController : MonoBehaviour
         if (hit.gameObject.tag == "Coin")
         {
             Debug.Log("Coin");
-            coinNum ++;
-            GameObject.Find("coinNumber").GetComponent<Text>().text = coinNum.ToString();
+            GameObject.Find("Parent_Player").GetComponent<CostumeSwitch>().coinNumber++;
+            GameObject.Find("coinNumber").GetComponent<Text>().text = GameObject.Find("Parent_Player").GetComponent<CostumeSwitch>().coinNumber.ToString();
             Destroy(hit.gameObject);
         }
     }
