@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
         } 
 
         // Jump
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && !isCrouching)
         {
             anim.SetBool("Falling", false);
             Invoke("JumpAnimation", 0.45f);
