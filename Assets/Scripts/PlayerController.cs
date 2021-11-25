@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     bool isCrouching;
     bool isJumping;
 
+
     // Animation States
     const string STAND_IDLE = "Idle";
     const string CROUCH_IDLE = "Crouch idle";
@@ -54,11 +55,12 @@ public class PlayerController : MonoBehaviour
         isJumping = false;
     }
 
+    // Add number to the screen when you pick a coin
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.gameObject.tag == "Coin")
         {
-            Debug.Log("Coin");
+            Debug.Log("Coin"+GameObject.Find("Parent_Player").GetComponent<CostumeSwitch>().coinNumber);
             GameObject.Find("Parent_Player").GetComponent<CostumeSwitch>().coinNumber++;
             GameObject.Find("coinNumber").GetComponent<Text>().text = GameObject.Find("Parent_Player").GetComponent<CostumeSwitch>().coinNumber.ToString();
             Destroy(hit.gameObject);
@@ -67,6 +69,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // Check if the game ends
+        if (GameObject.Find("Parent_Player").GetComponent<CostumeSwitch>().coinNumber >= 25)
+        {
+            GameEnd();
+        }
+
         // check the collision continiously
         isGrounded = controller.isGrounded;
         isInWater = Physics.CheckSphere(groundCheck.position, waterDistance, waterMask);
@@ -239,7 +247,6 @@ public class PlayerController : MonoBehaviour
         }
 
 
-
     }
 
     void ChangeAnimationState(string newState)
@@ -268,6 +275,15 @@ public class PlayerController : MonoBehaviour
     {
         isJumping = false;
         anim.SetBool("Falling", true);
+    }
+    void GameEnd()
+    {
+        if (GameObject.Find("GuideUI"))
+        {
+            GameObject.Find("GuideUI").SetActive(false);
+        }
+
+
     }
 
 }

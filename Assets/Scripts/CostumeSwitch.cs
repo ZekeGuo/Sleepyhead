@@ -18,7 +18,11 @@ public class CostumeSwitch : MonoBehaviour
     public GameObject normalCostumeUI;
     public GameObject PrincessCostumeUI;
     public GameObject ClownCostumeUI;
+    public GameObject endUI;
     public int coinNumber;
+    public GameObject fireworks;
+    public Camera oldCamera;
+    public Camera finalCamera;
 
     // Update is called once per frame
     void Start()
@@ -34,6 +38,14 @@ public class CostumeSwitch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (coinNumber >= 25)
+        {
+            endUI.SetActive(true);
+            finalCamera.gameObject.SetActive(true);
+            fireworks.SetActive(true);
+            return;
+        }
+
         if (isChanging)
         {
             closetUI.SetActive(true);
@@ -61,10 +73,6 @@ public class CostumeSwitch : MonoBehaviour
         }
 
         previousPosition = possibleCostume[whichCostume].transform;
-
-
-
-
         SwitchCameraFocus();
     }
 
@@ -105,5 +113,6 @@ public class CostumeSwitch : MonoBehaviour
         cinemachineFreeLook.Follow = possibleCostume[whichCostume].transform;
         cinemachineFreeLook.LookAt = possibleCostume[whichCostume].transform;
     }
+
 
 }
