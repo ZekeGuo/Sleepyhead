@@ -18,7 +18,7 @@ public class CostumeSwitch : MonoBehaviour
     public GameObject normalCostumeUI;
     public GameObject PrincessCostumeUI;
     public GameObject ClownCostumeUI;
-
+    public int coinNumber;
 
     // Update is called once per frame
     void Start()
@@ -28,6 +28,7 @@ public class CostumeSwitch : MonoBehaviour
             possibleCostume[i].SetActive(false);
         }
         possibleCostume[0].SetActive(true);
+        coinNumber = 0;
     }
 
     // Update is called once per frame
@@ -41,6 +42,8 @@ public class CostumeSwitch : MonoBehaviour
         {
             closetUI.SetActive(false);
         }
+
+        GameObject.Find("coinNumber").GetComponent<Text>().text = coinNumber.ToString();
 
         // Press Q to switch to previous costume
         if (Input.GetKeyDown(KeyCode.Q) && Input.GetAxisRaw("Horizontal") <= 0.1f && Input.GetAxisRaw("Vertical") <= 0.1f && isChanging)
